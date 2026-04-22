@@ -1,4 +1,3 @@
-const { allowedOrigin } = require('./config');
 const express = require('express');
 const cors    = require('cors');
 const helmet  = require('helmet');
@@ -8,8 +7,8 @@ const db = require('./db');
 
 const app = express();
 
-app.use(helmet());
-app.use(cors({ origin: allowedOrigin }));
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+app.use(cors({ origin: true })); // reflect request Origin; allow any caller
 app.use(morgan('dev'));
 app.use(express.json());
 
